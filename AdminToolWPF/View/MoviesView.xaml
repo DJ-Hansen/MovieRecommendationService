@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="AdminToolWPF.View.MoviesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AdminToolWPF.View"
+             mc:Ignorable="d" 
+             DataContext="{Binding MoviesViewModel}"
+             d:DesignHeight="550" d:DesignWidth="800">
+
+
+
+    <UserControl.Resources>
+
+        <Style TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Items.Count}" Value="0" >
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <TextBlock>Movies are being loaded</TextBlock>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+
+
+
+    <Grid Background="White" >
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Movies" FontSize="30" Margin="15,0,30,0"></TextBlock>
+            <TextBlock Grid.Column="1" Text="Filter" Margin="5,0,10,0" FontSize="18" VerticalAlignment="Center"></TextBlock>
+            <TextBox Grid.Column="2"  Height="25" Name="txtFilter" VerticalAlignment="Center" Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" />
+
+        </Grid>
+                
+                
+
+        <ListBox 
+            Margin="15,15,15,10"
+            Grid.Row="2"
+            SelectedItem="{Binding SelectedMovie, Mode=TwoWay}" 
+            ItemsSource="{Binding SourceCollection}" 
+            DisplayMemberPath="Title" 
+            MinHeight="200"
+            VirtualizingPanel.IsVirtualizing="True"
+            VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+            VirtualizingPanel.VirtualizationMode="Recycling"
+            ScrollViewer.IsDeferredScrollingEnabled="True">
+        </ListBox>
+
+
+
+
+
+        <Button Grid.Row="3" Content="Create a new Movie" Height="25" FontWeight="SemiBold" Command="{Binding NewMovieCommand}" Margin="5,5,5,0"></Button>
+
+        <Button Grid.Row="4"  Content="Edit selected Movie" Height="25" FontWeight="SemiBold" Command="{Binding EditMovieCommand}"   Margin="5,5,5,0"></Button>
+
+        <Button Grid.Row="5"  Content="Delete selected Movie" Height="25" FontWeight="SemiBold"  Command="{Binding DeleteMovieCommand}"  Margin="5,5,5,5"></Button>
+
+        <Button Grid.Row="6"  Command="{Binding LoadCommand}"   Content="Reaload Movies" Height="25" FontWeight="SemiBold" Visibility="Visible"  Margin="5,0,5,5"></Button>
+
+
+
+
+    </Grid>
+</UserControl>

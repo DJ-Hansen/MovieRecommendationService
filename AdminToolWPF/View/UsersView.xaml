@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="AdminToolWPF.View.UsersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AdminToolWPF.View"
+             mc:Ignorable="d" 
+             DataContext="{Binding UsersViewModel}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+
+        <Style TargetType="ListBox" BasedOn="{StaticResource {x:Type ListBox}}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=Items.Count}" Value="0" >
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <TextBlock>No items to display</TextBlock>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+
+
+
+    <Grid Background="White">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Users" FontSize="30" Margin="15,0,30,0"></TextBlock>
+            <TextBlock Grid.Column="1" Text="Filter" Margin="5,0,10,0" FontSize="18" VerticalAlignment="Center"></TextBlock>
+            <TextBox Grid.Column="2"  Height="25" Name="txtFilter" VerticalAlignment="Center" Text="{Binding Path=FilterText, UpdateSourceTrigger=PropertyChanged}" />
+
+        </Grid>
+
+
+
+        <ListBox 
+            Margin="15,15,15,10"
+            Grid.Row="2"
+            SelectedItem="{Binding SelectedUser, Mode=TwoWay}" 
+            ItemsSource="{Binding SourceCollection}" 
+            DisplayMemberPath="UserName" 
+            MinHeight="200"
+            VirtualizingPanel.IsVirtualizing="True"
+            VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+            VirtualizingPanel.VirtualizationMode="Recycling"
+            ScrollViewer.IsDeferredScrollingEnabled="True">
+        </ListBox>
+
+
+
+
+
+        <Button Grid.Row="3" Content="Create a new User" Height="25" FontWeight="SemiBold" Command="{Binding NewUserCommand}" Margin="5,5,5,0"></Button>
+
+        <Button Grid.Row="4"  Content="Edit selected User" Height="25" FontWeight="SemiBold" Command="{Binding EditUserCommand}"   Margin="5,5,5,0"></Button>
+
+        <Button Grid.Row="5"  Content="Delete selected User" Height="25" FontWeight="SemiBold"  Command="{Binding DeleteUserCommand}"  Margin="5,5,5,5"></Button>
+
+        <Button Grid.Row="6" Visibility="Visible" Command="{Binding LoadCommand}"   Content="Reaload Users" Height="25" FontWeight="SemiBold"  Margin="5,5,5,5"></Button>
+
+
+
+
+    </Grid>
+</UserControl>

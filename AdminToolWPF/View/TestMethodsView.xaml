@@ -1,0 +1,181 @@
+﻿<UserControl x:Class="AdminToolWPF.View.TestMethodsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AdminToolWPF.View"
+             mc:Ignorable="d" 
+             DataContext="{Binding TestMethodsViewModel}"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid Background="White" Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+
+        <TextBlock Text="Test Methods" FontSize="30" Grid.Row="0"></TextBlock>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+ 
+            <GroupBox Grid.Row="1" Header="Movies methods" Padding="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Get All Movies" FontSize="14" FontWeight="Medium" Grid.Row="0" Grid.Column="0" />
+
+                    <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  Content="Get All Movies"  Command="{Binding GetAllMoviesCommand}" />
+
+
+                    <TextBlock Text="Get Movie by ID" FontSize="14" FontWeight="Medium" Grid.Row="2" Grid.Column="0" />
+                    <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding Path=MovieID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox" />
+                    <Button Grid.Row="3" Grid.Column="1"  Content="Get Movie by ID" Command="{Binding GetMovieByIDCommand}" />
+
+
+                    <TextBlock Text="Find Movie by search Title" FontSize="14" FontWeight="Medium" Grid.Row="4" Grid.Column="0" />
+                    <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding Path=MovieTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button Grid.Row="5" Grid.Column="1" Content="Find Movie search by Title" Command="{Binding GetMovieByTitleCommand}"  />
+
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Grid.Row="2" Header="Users methods" Padding="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Get All Users" FontSize="14" FontWeight="Medium" Grid.Row="0" Grid.Column="0" />
+
+                    <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  Content="Get All Users"  Command="{Binding GetAllUsersCommand}"  />
+
+
+                    <TextBlock Text="Get User by ID" FontSize="14" FontWeight="Medium" Grid.Row="2" Grid.Column="0" />
+                    <TextBox Grid.Row="3" Grid.Column="0"  Text="{Binding Path=UserID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  PreviewTextInput="NumberValidationTextBox" />
+                    <Button Grid.Row="3" Grid.Column="1"  Content="Get User by ID"  Command="{Binding GetUserByIDCommand}" />
+
+                </Grid>
+            </GroupBox>
+
+
+            <GroupBox Grid.Row="3" Header="Recommendation methods" Padding="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+
+
+                    <TextBlock Text="Get Recommendations for User ID" FontSize="14" FontWeight="Medium" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" />
+                    <TextBox Grid.Row="3" Grid.Column="0"  Text="{Binding Path=UserIDRecommendation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  PreviewTextInput="NumberValidationTextBox" />
+                    <Button Grid.Row="3" Grid.Column="1"  Content="Get User by ID"  Command="{Binding GetMovieRecommendationCommand}" />
+
+                </Grid>
+            </GroupBox>
+        </Grid>
+        
+
+        
+        
+        
+        <TextBlock Text="Results" FontSize="20" Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom"></TextBlock>
+
+        <Grid 
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.RowSpan="2">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Querry" FontSize="12" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Margin="10,0,10,0"></TextBlock>
+            <TextBox 
+                Text="{Binding CurrentSentQuerry}"
+                Grid.Row="0"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Grid.ColumnSpan="1">
+            </TextBox>
+
+            <Button 
+                Grid.Row="0"
+                Grid.Column="2"
+                Margin="5,0,0,0"
+                Width="90"
+                VerticalAlignment="Center"
+                Command="{Binding SendQuerry}" 
+                Content="Send Request">
+                
+            </Button>
+            
+
+            <TextBox 
+                Margin="5,0,5,5"
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                TextWrapping="Wrap"
+                Text="{Binding ConsoleText}" 
+                VerticalScrollBarVisibility="Auto">
+            </TextBox>
+
+        </Grid>
+        
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="AdminToolWPF.View.MovieView"
+             x:Name="MovieWindowWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AdminToolWPF.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="400">
+    
+    <Grid Background="white" Margin="5">
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+                <TextBlock Text="MovieName" FontWeight="Bold" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,2,15,2"/>
+                <TextBlock Text="Release Year" FontWeight="Bold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,2,15,2"/>
+                <TextBlock Text="Genre" FontWeight="Bold" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,2,15,2"/>
+
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="0,2,0,2" Height="18" Text="{Binding Title}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="0,2,0,2" Height="18" Text="{Binding ReleaseYear}"/>
+
+
+
+
+
+                <!--<ListBox 
+                    Grid.Row="2"
+                    Grid.Column="1" 
+                    ItemsSource="{Binding GenreViewModelList}" 
+                    DisplayMemberPath="GenreText" 
+                    MinHeight="100"
+                    VirtualizingPanel.IsVirtualizing="True"
+                    VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                    VirtualizingPanel.VirtualizationMode="Recycling"
+                    ScrollViewer.IsDeferredScrollingEnabled="True">
+                </ListBox>-->
+
+
+
+            <ListBox 
+                    IsEnabled="False"
+                    Grid.Row="2" 
+                    Grid.Column="1" 
+                    Margin="0,2,0,2" 
+                    ItemsSource="{Binding GenreViewModelList}" 
+                    MinHeight="55"
+                    VirtualizingPanel.IsVirtualizing="True"
+                    VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                    VirtualizingPanel.VirtualizationMode="Recycling"
+                    ScrollViewer.IsDeferredScrollingEnabled="True">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="{Binding GenreText}" IsChecked="{Binding IsSelected}" Margin="0,5,0,0"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+            </Grid>
+            
+        <Grid Grid.Row="1" Margin="10,5,10,10">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button  Grid.Column="0" Command="{Binding UpdateMovieCommand}" Content="Save changes" Margin="0,0,2,0"/>
+            <Button Grid.Column="1" Command="{Binding CancelCommand}"  Content="Cancel" Margin="2,0,0,0"/>
+            <!--<Button Grid.Column="1"  Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=MovieWindowWindow}"  Content="Cancel" Margin="2,0,0,0"/>-->
+        </Grid>
+                
+    </Grid>
+</UserControl>

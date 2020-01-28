@@ -1,0 +1,58 @@
+﻿<Window x:Class="AdminToolWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdminToolWPF"
+        xmlns:viewModel="clr-namespace:AdminToolWPF.ViewModel"
+        xmlns:view="clr-namespace:AdminToolWPF.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="550" Width="950">
+    
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:MoviesViewModel}">
+            <view:MoviesView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:UsersViewModel}">
+            <view:UsersView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:TestMethodsViewModel}">
+            <view:TestMethodsView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
+            <view:ConnectionSettingsView />
+        </DataTemplate>
+
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+
+    <Grid>
+        <DockPanel>
+            <Border DockPanel.Dock="Top" BorderBrush="Black" BorderThickness="0,0,1,0">
+                <ItemsControl ItemsSource="{Binding PageViewModels}" HorizontalAlignment="Right">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Content="{Binding Name}"
+                                    Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                    CommandParameter="{Binding }"
+                                    Padding="10,2,10,2"
+                                    Margin="2"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Border>
+
+            <ContentControl Content="{Binding CurrentPageViewModel}" />
+        </DockPanel>
+        
+        <TextBlock Text="LOADING!!!" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" Visibility="{Binding Path=WorkInProgress, Converter={StaticResource BoolToVis}}" ></TextBlock>
+
+        
+    </Grid>
+        
+</Window>
